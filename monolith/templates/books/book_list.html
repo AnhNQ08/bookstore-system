@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Danh sách sách</h1>
+
+{% for book in books %}
+    <div>
+        <h3>{{ book.title }}</h3>
+        <p>Tác giả: {{ book.author }}</p>
+        <p>Giá: {{ book.price }}</p>
+    </div>
+    <hr>
+{% empty %}
+    <p>Chưa có sách</p>
+{% endfor %}
+{% endblock %}
