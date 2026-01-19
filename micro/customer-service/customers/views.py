@@ -29,3 +29,12 @@ def login(request):
         "name": customer.name,
         "email": customer.email
     })
+
+@api_view(['GET'])
+def get_customer(request, customer_id):
+    try:
+        customer = Customer.objects.get(id=customer_id)
+        serializer = CustomerSerializer(customer)
+        return Response(serializer.data)
+    except Customer.DoesNotExist:
+        return Response({"error": "Customer not found"}, status=404)

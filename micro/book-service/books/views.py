@@ -8,3 +8,12 @@ def list_books(request):
     books = Book.objects.all()
     serializer = BookSerializer(books, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def get_book(request, book_id):
+    try:
+        book = Book.objects.get(id=book_id)
+        serializer = BookSerializer(book)
+        return Response(serializer.data)
+    except Book.DoesNotExist:
+        return Response({"error": "Book not found"}, status=404)
